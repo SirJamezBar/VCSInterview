@@ -1,0 +1,44 @@
+
+<div mat-dialog-content>
+   <h1>Edit Contact</h1>
+     <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm)">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput name ='name' type="text" formControlName="nameFormControl">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Surname</mat-label>
+            <input matInput name="'surname" type="text" formControlName="surnameFormControl">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="text" name='number'formControlName="numberFormControl">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="email" name='name' matInput formControlName="emailFormControl">
+            <mat-error *ngIf="contactForm.get('emailFormControl')?.invalid && (contactForm.get('emailFormControl')?.dirty || contactForm.get('emailFormControl')?.touched)">
+              Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="datepicker" formControlName="dateFormControl">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker disabled="false">
+                <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+       <div>
+        <button mat-raised-button type="submit" [disabled]="contactForm.invalid">Save</button>
+       </div>
+    </form>
+</div>
